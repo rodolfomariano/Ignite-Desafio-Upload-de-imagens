@@ -1,4 +1,4 @@
-import { Box, Button, Stack, useToast } from '@chakra-ui/react';
+import { Box, Button, Input, Stack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
@@ -19,12 +19,25 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const formValidations = {
     image: {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
+      required: 'Arquivo obrigatório',
+      validate: {
+        lessThan10MB: 'O arquivo deve ser menor que 10MB',
+        acceptedFormats: {
+          type: '',
+          required: 'Somente são aceitos arquivos PNG, JPEG e GIF'
+        }
+      }
     },
     title: {
       // TODO REQUIRED, MIN AND MAX LENGTH VALIDATIONS
+      required: 'Título obrigatório',
+      minLength: 'Mínimo de 2 caracteres',
+      maxLength: 'Máximo de 20 caracteres'
     },
     description: {
       // TODO REQUIRED, MAX LENGTH VALIDATIONS
+      required: 'Descrição obrigatória',
+      maxLength: 'Máximo de 65 caracteres'
     },
   };
 
@@ -94,6 +107,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       >
         Enviar
       </Button>
+      <Input ></Input>
     </Box>
   );
 }
